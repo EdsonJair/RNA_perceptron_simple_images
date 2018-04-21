@@ -30,9 +30,26 @@ tree_five = cv.imread('tres_5.jpg', 0)
 train_images = [cero_one, cero_two, cero_tree, cero_four, cero_five,
                         two_one,two_two,two_tree,two_four, two_five,one_one,one_two,one_tree,one_four,one_five,
                         tree_one, tree_two, tree_tree, tree_four, tree_five]
-'''cambiar valores de 0 - 255 a -1 y 1'''
+
 bipolar_images = []
 for i in train_images:
     vector_imagen=np.ravel(i)
     bipolar_images.append(vector_imagen)
 print(np.shape(bipolar_images))
+valor_esperado=[1,1,1,1,1,1,-1,1,-1,1,-1,1,-1,1,-1,-1,-1,-1,-1,-1]
+print(len(valor_esperado))
+#ASIGNACION DE VIAS A LOS PATRONES DE ENTRADA
+entradas_vias=[]
+print("VECTOR DE ENTRADA AGREGANDO  VIAS")
+
+for i in range(len(bipolar_images)):
+    vias = []
+    vias= [1]
+    for j in range(len( bipolar_images[i])):
+        vias.append(int(bipolar_images[i][j]))
+    entradas_vias.append(vias)
+    print(entradas_vias[i])
+print(np.shape(entradas_vias))
+print("VALOR ESPERADO")
+print(valor_esperado)
+#ARREGLO DE LA MATRIZ "ALEATORIA"
