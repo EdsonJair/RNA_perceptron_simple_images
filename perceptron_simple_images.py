@@ -27,16 +27,18 @@ tree_four = cv.imread('tres_4.jpg', 0)
 tree_five = cv.imread('tres_5.jpg', 0)
 
 
-train_images = [cero_one, cero_two, cero_tree, cero_four, cero_five,
-                        two_one,two_two,two_tree,two_four, two_five,one_one,one_two,one_tree,one_four,one_five,
-                        tree_one, tree_two, tree_tree, tree_four, tree_five]
+#train_images = [cero_one, cero_two, cero_tree, cero_four, cero_five,
+#                        one_one,one_two,one_tree,one_four,one_five]
 
+    #            two_one, two_two, two_tree, two_four, two_five,tree_one, tree_two, tree_tree, tree_four, tree_five]
+train_images=[cero_one, cero_two, cero_tree,cero_four,tree_one,tree_two, tree_tree,tree_four]
 bipolar_images = []
 for i in train_images:
     vector_imagen=np.ravel(i)
     bipolar_images.append(vector_imagen)
 print(np.shape(bipolar_images))
-valor_esperado=[1,1,1,1,1,1,-1,1,-1,1,-1,1,-1,1,-1,-1,-1,-1,-1,-1]
+#valor_esperado=[1,1,1,1,1,-1,-1,-1,-1,-1]
+valor_esperado=[1,1,1,1,-1,-1,-1,-1]
 print(len(valor_esperado))
 #ASIGNACION DE VIAS A LOS PATRONES DE ENTRADA
 entradas_vias=[]
@@ -94,3 +96,26 @@ while(correcto!=True):
         errores.append(error)
         matriz_pesos = np.array(vector_pesos).reshape(len(entradas_vias[i]),1)
         i=0
+
+busqueda=cero_five
+prueba=np.ravel(busqueda)
+cv.imshow("PRUEBA",busqueda)
+res_final=0
+pruebas=[]
+valor=0
+pruebas=[1]
+for i in range(len(prueba)):
+    pruebas.append(prueba[i])
+for j in range(len(pruebas)):
+    res=pruebas[i]*vector_pesos[i]
+    res_final=res_final+res
+print(res_final)
+if (res_final >= 0):
+    res_final = 1
+else:
+    res_final = -1
+
+print(res_final)
+posicion=valor_esperado.index(res_final)
+cv.imshow("Salida",train_images[posicion])
+cv.waitKey()
